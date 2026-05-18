@@ -23,7 +23,7 @@ export function HeroSection() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="text-center lg:text-left">
             <h1 className="mb-6 text-balance text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl">
-              3D Printing: How It Impacts Society
+              3D Printing: How It <span className="text-violet-400">Impacts Society</span>
             </h1>
             <p className="mx-auto mb-10 max-w-2xl text-pretty text-lg leading-relaxed text-slate-300 md:text-xl lg:mx-0">
               Exploring how 3D printing and additive manufacturing reshapes healthcare, updates legal
