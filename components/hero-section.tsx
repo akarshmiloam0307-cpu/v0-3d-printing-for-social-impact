@@ -20,11 +20,11 @@ export function HeroSection() {
 
       <div className="relative mx-auto max-w-4xl text-center">
         <h1 className="mb-6 text-balance text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl">
-          Manufacturing a Better Tomorrow
+          3D Printing: How It Impacts Society
         </h1>
         <p className="mx-auto mb-10 max-w-2xl text-pretty text-lg leading-relaxed text-slate-300 md:text-xl">
-          Exploring how additive manufacturing reshapes healthcare, updates legal and ethical
-          paradigms, and drives localized humanitarian aid across the globe.
+          Exploring how 3D printing and additive manufacturing reshapes healthcare, updates legal
+          and ethical paradigms, and drives localized humanitarian aid across the globe.
         </p>
         <Button
           asChild

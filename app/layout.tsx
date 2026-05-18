@@ -7,8 +7,8 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: '3D Printing for Social Impact | AETHER Impact',
-  description: 'Exploring how additive manufacturing reshapes healthcare, updates legal and ethical paradigms, and drives localized humanitarian aid across the globe.',
+  title: '3D Printing: How It Impacts Society | AETHER Impact',
+  description: 'Exploring how 3D printing and additive manufacturing reshapes healthcare, updates legal and ethical paradigms, and drives localized humanitarian aid across the globe.',
   generator: 'v0.app',
   icons: {
     icon: [
