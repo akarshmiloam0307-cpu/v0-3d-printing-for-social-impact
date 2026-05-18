@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowDown } from "lucide-react"
 
@@ -18,24 +19,42 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="relative mx-auto max-w-4xl text-center">
-        <h1 className="mb-6 text-balance text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl">
-          3D Printing: How It Impacts Society
-        </h1>
-        <p className="mx-auto mb-10 max-w-2xl text-pretty text-lg leading-relaxed text-slate-300 md:text-xl">
-          Exploring how 3D printing and additive manufacturing reshapes healthcare, updates legal
-          and ethical paradigms, and drives localized humanitarian aid across the globe.
-        </p>
-        <Button
-          asChild
-          size="lg"
-          className="bg-primary text-primary-foreground hover:bg-primary/90"
-        >
-          <Link href="#impacts" className="inline-flex items-center gap-2">
-            Explore the Impact
-            <ArrowDown className="h-4 w-4" />
-          </Link>
-        </Button>
+      <div className="relative mx-auto max-w-6xl">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          <div className="text-center lg:text-left">
+            <h1 className="mb-6 text-balance text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl">
+              3D Printing: How It Impacts Society
+            </h1>
+            <p className="mx-auto mb-10 max-w-2xl text-pretty text-lg leading-relaxed text-slate-300 md:text-xl lg:mx-0">
+              Exploring how 3D printing and additive manufacturing reshapes healthcare, updates legal
+              and ethical paradigms, and drives localized humanitarian aid across the globe.
+            </p>
+            <Button
+              asChild
+              size="lg"
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+            >
+              <Link href="#impacts" className="inline-flex items-center gap-2">
+                Explore the Impact
+                <ArrowDown className="h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+          <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
+            <div className="relative overflow-hidden rounded-2xl shadow-2xl shadow-black/30">
+              <Image
+                src="/images/3d-printer.jpg"
+                alt="Modern 3D printer in action, creating a detailed object with precision"
+                width={600}
+                height={400}
+                className="h-auto w-full object-cover"
+                priority
+              />
+              <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
+            </div>
+            <div className="absolute -bottom-4 -right-4 -z-10 h-full w-full rounded-2xl bg-primary/20" />
+          </div>
+        </div>
       </div>
     </header>
   )
