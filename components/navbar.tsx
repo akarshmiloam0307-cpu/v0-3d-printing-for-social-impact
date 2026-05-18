@@ -9,7 +9,7 @@ const navLinks = [
   { href: "#home", label: "Home" },
   { href: "#impacts", label: "Social Pillars" },
   { href: "#frameworks", label: "Frameworks" },
-  { href: "#about", label: "Project Overview" },
+  { href: "#about", label: "About" },
 ]
 
 export function Navbar() {
