@@ -1,7 +1,7 @@
 import Link from "next/link"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowDown } from "lucide-react"
+import { Animated3DPrinter } from "./animated-3d-printer"
 
 export function HeroSection() {
   return (
@@ -41,18 +41,7 @@ export function HeroSection() {
             </Button>
           </div>
           <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
-            <div className="relative overflow-hidden rounded-2xl shadow-2xl shadow-black/30">
-              <Image
-                src="/images/3d-printer.jpg"
-                alt="Modern 3D printer in action, creating a detailed object with precision"
-                width={600}
-                height={400}
-                className="h-auto w-full object-cover"
-                priority
-              />
-              <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
-            </div>
-            <div className="absolute -bottom-4 -right-4 -z-10 h-full w-full rounded-2xl bg-primary/20" />
+            <Animated3DPrinter />
           </div>
         </div>
       </div>
