@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Printing & Its Social Impact | Future Horizon</title>
+    <style>
+        /* Modern Typography & Reset */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&display=swap');
+
+        :root {
+            --bg-deep: #060913;
+            --bg-darker: #0b111e;
+            --bg-glass: rgba(11, 21, 44, 0.6);
+            --bg-glass-hover: rgba(16, 32, 66, 0.8);
+            --neon-blue: #00f0ff;
+            --neon-blue-glow: rgba(0, 240, 255, 0.3);
+            --neon-cyan: #0066ff;
+            --neon-cyan-glow: rgba(0, 102, 255, 0.4);
+            --text-primary: #ffffff;
+            --text-secondary: #a3b3cc;
+            --border-color: rgba(0, 240, 255, 0.15);
+            --border-color-hover: rgba(0, 240, 255, 0.5);
+            --font-display: 'Orbitron', sans-serif;
+            --font-body: 'Rajdhani', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-secondary);
+            font-family: var(--font-body);
+            font-size: 1.15rem;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Glow Backgrounds */
+        .ambient-glow-1 {
+            position: absolute;
+            width: 45vw;
+            height: 45vw;
+            top: -10vw;
+            right: -10vw;
+            background: radial-gradient(circle, var(--neon-blue-glow) 0%, transparent 70%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            width: 50vw;
+            height: 50vw;
+            top: 120vw;
+            left: -15vw;
+            background: radial-gradient(circle, var(--neon-cyan-glow) 0%, transparent 70%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Sticky Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(6, 9, 19, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 2rem;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue-glow);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--neon-blue);
+            box-shadow: 0 0 8px var(--neon-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+            text-shadow: 0 0 8px var(--neon-blue-glow);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        #hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem 2rem;
+            background: radial-gradient(circle at center, rgba(11, 21, 44, 0.4) 0%, var(--bg-deep) 100%);
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        /* Blueprint Grid Overlay */
+        #hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center;
+            mask-image: radial-gradient(ellipse at center, black, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black, transparent 80%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 10;
+        }
+
+        .hero-tagline {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            color: var(--neon-blue);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            background: rgba(0, 240, 255, 0.05);
+            box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.1);
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--text-primary) 30%, var(--neon-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(0, 240, 255, 0.1);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 500;
+        }
+
+        .btn-futuristic {
+            display: inline-block;
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--bg-deep);
+            background-color: var(--neon-blue);
+            padding: 1.1rem 2.5rem;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+            border: 1px solid var(--neon-blue);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-futuristic:hover {
+            color: var(--neon-blue);
+            background-color: transparent;
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.7);
+            border-color: var(--neon-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Container & Sectioning Elements */
+        section {
+            padding: 8rem 2rem;
+            position: relative;
+            z-index: 3;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-tag {
+            font-family: var(--font-display);
+            color: var(--neon-blue);
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- GLOWING ACCORDION SYSTEM (PURE CSS DROPDOWN) --- */
+        .infographic-section {
+            background: radial-gradient(circle at center, rgba(16, 32, 66, 0.2) 0%, transparent 80%);
+        }
+
+        .accordion-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .accordion-item {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* Pure CSS checked radio handles single active toggle */
+        .info-tab-input {
+            display: none !important;
+        }
+
+        /* Label acting as Header Trigger */
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2.25rem 2.5rem;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: rgba(16, 32, 66, 0.4);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .info-tab-icon {
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .header-text h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .header-text p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+
+        .chevron-icon {
+            color: var(--text-secondary);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), color 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+
+        /* Active CSS State modifications using :has() matching sibling status */
+        .accordion-item:has(.info-tab-input:checked) {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2), inset 0 0 15px rgba(0, 240, 255, 0.05);
+            background: var(--bg-glass-hover);
+        }
+
+        .accordion-item:has(.info-tab-input:checked) .accordion-header {
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .accordion-item:has(.info-tab-input:checked) .header-text h3 {
+            color: var(--text-primary);
+            text-shadow: 0 0 10px var(--neon-blue-glow);
+        }
+
+        .accordion-item:has(.info-tab-input:checked) .info-tab-icon {
+            color: var(--neon-blue);
+            filter: drop-shadow(0 0 8px var(--neon-blue));
+        }
+
+        .accordion-item:has(.info-tab-input:checked) .chevron-icon {
+            transform: rotate(180deg);
+            color: var(--neon-blue);
+            filter: drop-shadow(0 0 6px var(--neon-blue));
+        }
+
+        /* Smooth Expanding Dropdown Area */
+        .dropdown-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.4s ease;
+            padding: 0 2.5rem;
+        }
+
+        .info-tab-input:checked ~ .dropdown-content {
+            max-height: 2000px; /* highly accommodating ceiling height */
+            opacity: 1;
+            padding: 2.5rem;
+        }
+
+        /* Dropdown interior columns structure */
+        .panel-grid {
+            display: grid;
+            grid-template-cols: 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        @media (min-width: 992px) {
+            .panel-grid {
+                grid-template-cols: 2fr 1.2fr;
+            }
+        }
+
+        .panel-main h4 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .panel-main p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .panel-quote {
+            border-left: 3px solid var(--neon-blue);
+            background: rgba(0, 240, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 2rem;
+        }
+
+        .panel-quote blockquote {
+            font-style: italic;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .panel-quote cite {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .panel-sources h5 {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .source-card {
+            background: var(--bg-deep);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .source-card:hover {
+            border-color: rgba(0, 240, 255, 0.25);
+            transform: translateX(3px);
+        }
+
+        .source-type {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .source-text {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: var(--text-secondary);
+        }
+
+        /* Positive Social Impacts Grid */
+        .impacts-grid {
+            display: grid;
+            grid-template-cols: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .impact-box {
+            background: radial-gradient(circle at top left, rgba(0, 102, 255, 0.1) 0%, transparent 60%), var(--bg-darker);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .impact-box:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+        }
+
+        .impact-stat {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--neon-blue);
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+
+        .impact-box h4 {
+            font-family: var(--font-display);
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Two Column Layout (Real World) */
+        .two-col-layout {
+            display: grid;
+            grid-template-cols: 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (min-width: 992px) {
+            .two-col-layout {
+                grid-template-cols: 1fr 1fr;
+            }
+        }
+
+        /* Inline SVG Technical Drawing / Printer */
+        .tech-drawing-container {
+            background: rgba(11, 21, 44, 0.3);
+            border: 1px dashed var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-drawing-container::after {
+            content: 'SYSTEM VIEW: LAYER ACTIVE';
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--neon-blue);
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        .real-world-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .real-world-content h3 {
+            font-family: var(--font-display);
+            color: var(--text-primary);
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+
+        .highlight-text {
+            border-left: 3px solid var(--neon-blue);
+            padding-left: 1.5rem;
+            color: var(--text-primary);
+            font-style: italic;
+        }
+
+        /* --- MODERN RESPONSIVE VIDEO GALLERY --- */
+        .video-section {
+            background: radial-gradient(circle at bottom center, rgba(0, 102, 255, 0.08) 0%, transparent 70%);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-cols: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .video-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-color-hover);
+            box-shadow: 0 12px 30px rgba(0, 240, 255, 0.2);
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background-color: #000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-info {
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .video-tag {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            align-self: flex-start;
+        }
+
+        .video-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            line-height: 1.3;
+        }
+
+        .video-desc {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        /* --- FUTURISTIC ACADEMIC REFERENCES SECTION --- */
+        .references-grid {
+            display: grid;
+            grid-template-cols: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .reference-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.25rem 2rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .reference-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-blue);
+            background: var(--bg-glass-hover);
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.15);
+        }
+
+        .reference-num {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--neon-blue);
+            line-height: 1;
+            opacity: 0.25;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .reference-card:hover .reference-num {
+            opacity: 0.8;
+            text-shadow: 0 0 10px var(--neon-blue-glow);
+        }
+
+        .ref-tag {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            align-self: flex-start;
+            margin-bottom: 1.25rem;
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        .ref-text {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        .ref-text em {
+            color: var(--text-primary);
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* Minimal Footer */
+        footer {
+            background-color: var(--bg-darker);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 2rem;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        .footer-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-family: var(--font-display);
+            letter-spacing: 1px;
+        }
+
+        .footer-text span {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue-glow);
+        }
+
+        /* Responsiveness for Smaller Screen Widths */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            #hero {
+                padding: 10rem 1.5rem 4rem 1.5rem;
+            }
+
+            section {
+                padding: 5rem 1.5rem;
+            }
+
+            .accordion-header {
+                padding: 1.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .chevron-icon {
+                align-self: flex-end;
+            }
+
+            .dropdown-content {
+                padding: 0 1.5rem;
+            }
+
+            .info-tab-input:checked ~ .dropdown-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Visual Glow Effects -->
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--neon-blue); filter: drop-shadow(0 0 5px var(--neon-blue));">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                FUTUR<span>3D</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#infographic">Focus Areas</a></li>
+                <li><a href="#impacts">Social Impacts</a></li>
+                <li><a href="#media">Media</a></li>
+                <li><a href="#references">References</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- 1. Hero Section -->
+    <section id="hero">
+        <div class="hero-content">
+            <span class="hero-tagline">Additive Revolution Portal</span>
+            <h1 class="hero-title">3D Printing & Its<br><span>Social Impact</span></h1>
+            <p class="hero-subtitle">Exploring how layered manufacturing is dismantling the traditional physical industrial model, shifting economic self-reliance, and customizing biological healthcare structures.</p>
+            <a href="#infographic" class="btn-futuristic">Explore More</a>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE INFOGRAPHIC ACCORDION DROPDOWN SECTION (Healthcare, Humanitarian, Legal) -->
+    <section id="infographic" class="infographic-section">
+        <div class="section-header">
+            <span class="section-tag">Interactive Ecosystem</span>
+            <h2 class="section-title">Societal Focus Pillars</h2>
+        </div>
+
+        <div class="accordion-container">
+            
+            <!-- ACCORDION DROP-DOWN ITEM 1: Healthcare & Prosthetics -->
+            <div class="accordion-item">
+                <input type="radio" id="tab-opt-1" name="infographic-engine" class="info-tab-input" checked>
+                
+                <label for="tab-opt-1" class="accordion-header">
+                    <div class="header-left">
+                        <div class="info-tab-icon">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4.5 16.5c-1.5 1.26-2.5 3.19-2.5 5.5h20c0-2.31-1-4.24-2.5-5.5"/>
+                                <circle cx="12" cy="10" r="4"/>
+                                <path d="M12 2v4M12 14v4M6 10H2M22 10h-4"/>
+                            </svg>
+                        </div>
+                        <div class="header-text">
+                            <h3>Healthcare & Prosthetics</h3>
+                            <p>Personalized bio-printing solutions and custom physical prostheses designed specifically to patient biometric properties.</p>
+                        </div>
+                    </div>
+                    <div class="chevron-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </label>
+
+                <div class="dropdown-content">
+                    <div class="panel-grid">
+                        <div class="panel-main">
+                            <h4>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--neon-blue);">
+                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                                </svg>
+                                Personalized Patient-Centric Biofabrication
+                            </h4>
+                            <p>The integration of 3D printing into the medical sector is having a revolutionary impact, enabling highly customized and patient-specific outcomes that transform clinical treatments. With this technology, surgical teams can create surgical guides and three-dimensional anatomical models that reflect a patient's exact internal organs and tissues before stepping into the operating theatre.</p>
+                            <p>This localized visualization reduces surgical duration and mitigates physiological risks of physical harm during complex maneuvers. Furthermore, the healthcare industry is moving rapidly toward "bioprinting"—using live cells as biological ink to grow biocompatible tissues. The ultimate trajectory is solving the chronic global organ shortage by printing matching replacement structures accepted seamlessly by the host body.</p>
+                            <div class="panel-quote">
+                                <blockquote>"These biological applications are transformational in scale... represents a major breakthrough in saving human lives."</blockquote>
+                                <cite>— Maric, Rodhain, & Barlette (2017)</cite>
+                            </div>
+                        </div>
+                        <div class="panel-sources">
+                            <h5>Peer-Reviewed Literature</h5>
+                            <div class="source-card">
+                                <span class="source-type">Socio-Technical Analysis</span>
+                                <p class="source-text">Zhao, Y. (2022). Analysis of the social impact of 3D Printing and its future development. <em>Highlights in Science, Engineering and Technology</em>.</p>
+                            </div>
+                            <div class="source-card">
+                                <span class="source-type">Bio-Mechanical Review</span>
+                                <p class="source-text">Gopinathan, J., & Noh, I. (2022). Recent trends in bioinks for 3D printing - biomaterials research. <em>International Journal of Biological Macromolecules</em>, 11, 76-85.</p>
+                            </div>
+                            <div class="source-card">
+                                <span class="source-type">Clinical Medicine Studies</span>
+                                <p class="source-text">Liaw, C. Y., & Guvendiren, M. (2017). Current and emerging applications of 3D printing in medicine. <em>Biofabrication</em>, 9(2), 024102.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACCORDION DROP-DOWN ITEM 2: Humanitarian Relief -->
+            <div class="accordion-item">
+                <input type="radio" id="tab-opt-2" name="infographic-engine" class="info-tab-input">
+                
+                <label for="tab-opt-2" class="accordion-header">
+                    <div class="header-left">
+                        <div class="info-tab-icon">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <circle cx="12" cy="11" r="3"/>
+                                <line x1="12" y1="14" x2="12" y2="17"/>
+                            </svg>
+                        </div>
+                        <div class="header-text">
+                            <h3>Humanitarian Relief</h3>
+                            <p>Localized manufacturing pipelines bypassing shattered global infrastructure to supply components on-demand in isolated crisis zones.</p>
+                        </div>
+                    </div>
+                    <div class="chevron-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </label>
+
+                <div class="dropdown-content">
+                    <div class="panel-grid">
+                        <div class="panel-main">
+                            <h4>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--neon-blue);">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/>
+                                </svg>
+                                Decentralized Humanitarian Logistics
+                            </h4>
+                            <p>Additive manufacturing is fundamentally restructuring the logistics of crisis response by shifting society from a rigid, centralized production model to a dynamic "prosumer" ecosystem. Instead of relying on vulnerable global distribution grids and shipping ports that can fail during disasters, aid organizations can deploy durable 3D printers directly in isolated regions.</p>
+                            <p>This allows localized relief systems to manufacture critical medical equipment, plumbing valves, and protective structures on-demand. Bypassing capital-heavy transport barriers, communities can directly source raw materials and print essential items locally. Research forecasts that this technical development will lead to an overall "social manufacturing" era, completely transforming the self-reliance of isolated societies.</p>
+                            <div class="panel-quote">
+                                <blockquote>"3D printing is transforming society from a central production model... to a model where prosumers can design and print objects in their own communities."</blockquote>
+                                <cite>— Campbell et al. (2011)</cite>
+                            </div>
+                        </div>
+                        <div class="panel-sources">
+                            <h5>Peer-Reviewed Literature</h5>
+                            <div class="source-card">
+                                <span class="source-type">Futurist Delphi Study</span>
+                                <p class="source-text">Jiang, R., Kleer, R., & Piller, F. T. (2017). Predicting the future of additive manufacturing: A Delphi study on economic and societal implications of 3D printing for 2030. <em>Technological Forecasting & Social Change</em>.</p>
+                            </div>
+                            <div class="source-card">
+                                <span class="source-type">Process Optimization Review</span>
+                                <p class="source-text">Gokhare, V. G., Raut, D. N., Shinde, D. K. (2021). A Review paper on 3D Printing Aspects and Various Processes Used in the 3D-Printing. <em>Energy</em>, 78(8), 78-86.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACCORDION DROP-DOWN ITEM 3: Legal & Ethical Frameworks -->
+            <div class="accordion-item">
+                <input type="radio" id="tab-opt-3" name="infographic-engine" class="info-tab-input">
+                
+                <label for="tab-opt-3" class="accordion-header">
+                    <div class="header-left">
+                        <div class="info-tab-icon">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22h9M3 22h9M12 2v20M4 6l8-4 8 4M4 10l8-4 8 4M12 10V6M4 14h16"/>
+                            </svg>
+                        </div>
+                        <div class="header-text">
+                            <h3>Legal & Ethical Frameworks</h3>
+                            <p>Challenging international IP patents, tracking unregulated dangerous fabrications, and implementing next-gen safety oversight.</p>
+                        </div>
+                    </div>
+                    <div class="chevron-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </label>
+
+                <div class="dropdown-content">
+                    <div class="panel-grid">
+                        <div class="panel-main">
+                            <h4>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--neon-blue);">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                                Regulatory Disruption & Public Security
+                            </h4>
+                            <p>While 3D printing technologies enable accelerated localized innovation, they also introduce critical legal and ethical challenges that traditional public policies are ill-equipped to control. As high-fidelity scanning tools allow physical items to be cloned, digitized, and uploaded to open-source codebases, copyright boundaries become incredibly difficult to enforce.</p>
+                            <p>Beyond digital piracy, significant public safety concerns have emerged. The decentralized, unregulated fabrication of functional untraceable firearms (ghost guns), counterfeit medicine supplies, and non-certified construction elements bypasses standard quality controls, border restrictions, and law enforcement oversight.</p>
+                            <div class="panel-quote">
+                                <blockquote>"3D printing poses several ethical and legal questions, mainly related to the protection of intellectual property and the possibility of manufacturing regulated and potentially dangerous objects such as weapons."</blockquote>
+                                <cite>— Maric, Rodhain, & Barlette (2017)</cite>
+                            </div>
+                        </div>
+                        <div class="panel-sources">
+                            <h5>Peer-Reviewed Literature</h5>
+                            <div class="source-card">
+                                <span class="source-type">Socio-Environmental Trends</span>
+                                <p class="source-text">Maric, J., Rodhain, F., & Barlette, Y. (2017). 3D Printing Trends - Discussing Societal, Environmental and Ethical Implications. <em>Management des Technologies Organisationnelles</em>.</p>
+                            </div>
+                            <div class="source-card">
+                                <span class="source-type">Environmental Impact Studies</span>
+                                <p class="source-text">Rodhain F. & Fallery B. (2011). ICT and Environment: Bad Assumptions and Recent Hypotheses. <em>Towards Managerial Excellence: Challenges and Choices</em>, Macmillan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 3. Positive Social Impacts Section -->
+    <section id="impacts">
+        <div class="section-header">
+            <span class="section-tag">Metrics of Change</span>
+            <h2 class="section-title">Positive Social Impacts</h2>
+        </div>
+        <div class="impacts-grid">
+            <!-- Box 1 -->
+            <div class="impact-box">
+                <div class="impact-stat">90%</div>
+                <h4>Reduced Manufacturing Waste</h4>
+                <p>Additive layered deposition applies only what is required structurally, leaving virtually zero material runoff compared to subtractive milling methods.</p>
+            </div>
+            <!-- Box 2 -->
+            <div class="impact-box">
+                <div class="impact-stat">10x</div>
+                <h4>Faster Prototyping</h4>
+                <p>Conceptualized blueprints skip intermediate testing and tool modifications. Ideas materialize to tangible components directly inside several hours.</p>
+            </div>
+            <!-- Box 3 -->
+            <div class="impact-box">
+                <div class="impact-stat">-75%</div>
+                <h4>Affordable Medical Costs</h4>
+                <p>Advanced prosthetics and custom mobility supports drop in production costs, helping remote areas access essential healthcare products easily.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Real World Impact Section -->
+    <section id="realworld">
+        <div class="two-col-layout">
+            <!-- Left Side: Interactive SVG 3D Printer visualization -->
+            <div class="tech-drawing-container">
+                <svg width="100%" height="320" viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Base Foundation of Printer -->
+                    <rect x="50" y="260" width="300" height="20" rx="4" fill="var(--bg-darker)" stroke="var(--neon-blue)" stroke-width="1.5"/>
+                    <!-- Side Structural Gantry Pillars -->
+                    <line x1="80" y1="40" x2="80" y2="260" stroke="var(--border-color)" stroke-width="2" stroke-dasharray="4 4"/>
+                    <line x1="320" y1="40" x2="320" y2="260" stroke="var(--border-color)" stroke-width="2" stroke-dasharray="4 4"/>
+                    <!-- Top Gantry Crossbar -->
+                    <rect x="70" y="40" width="260" height="15" rx="2" fill="var(--bg-darker)" stroke="var(--neon-blue)" stroke-width="1.5"/>
+                    
+                    <!-- Extruder Nozzle and Laser Light Grid -->
+                    <g transform="translate(140, 110)">
+                        <!-- Horizontal Support bar -->
+                        <rect x="-60" y="-10" width="240" height="8" fill="rgba(0,240,255,0.2)" stroke="var(--neon-blue)" stroke-width="1"/>
+                        <!-- Extruder Unit Body -->
+                        <rect x="30" y="-20" width="60" height="40" rx="4" fill="var(--bg-deep)" stroke="var(--neon-blue)" stroke-width="1.5"/>
+                        <!-- Active Laser / Heat Nozzle tip -->
+                        <polygon points="55,20 65,20 60,35" fill="var(--neon-blue)"/>
+                        <!-- Holographic / Glowing print projection -->
+                        <polygon points="60,35 10,130 110,130" fill="url(#laser-glow)" opacity="0.4"/>
+                        <!-- Target Dot -->
+                        <circle cx="60" cy="35" r="3" fill="#ffffff" filter="drop-shadow(0 0 6px var(--neon-blue))"/>
+                    </g>
+
+                    <!-- Object under production (Geometric Vase/Hologram) -->
+                    <path d="M160 260 L180 180 L170 145 L230 145 L220 180 L240 260 Z" fill="none" stroke="var(--neon-blue)" stroke-width="2" stroke-dasharray="3 3"/>
+                    
+                    <!-- Ground grid intersection line -->
+                    <line x1="60" y1="260" x2="340" y2="260" stroke="var(--neon-blue)" stroke-width="1"/>
+
+                    <!-- Gradient Definition -->
+                    <defs>
+                        <linearGradient id="laser-glow" x1="60" y1="35" x2="60" y2="130" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="var(--neon-blue)"/>
+                            <stop offset="100%" stop-color="transparent"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+
+            <!-- Right Side: Descriptive Socio-Technical Text -->
+            <div class="real-world-content">
+                <span class="section-tag" style="text-align: left;">Global Real-World Analysis</span>
+                <h3>Transforming Traditional Logistics</h3>
+                <p>3D Printing bypasses old centralized infrastructure. By shifting the physical source code of production to digital files, we cut out long transport systems and intermediate storage costs entirely. This opens up customized manufacturing to remote locations, allowing small centers or isolated island zones to operate independently.</p>
+                <p class="highlight-text">
+                    "This decentralized transition forces us to rethink governance frameworks—especially around physical property licensing, environmental footprint auditing, and digital border defense."
+                </p>
+                <p>With additive tools, objects can be shared as open-source files, printed on-demand, and recycled locally. This minimizes traditional industrial transport waste while challenging policy models to balance freedom with community safety.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW RESPONSIVE VIDEO GALLERY SECTION -->
+    <section id="media" class="video-section">
+        <div class="section-header">
+            <span class="section-tag">Video Insights</span>
+            <h2 class="section-title">Media Showcase</h2>
+        </div>
+        <div class="video-grid">
+            <!-- Video Card 1 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/GV8zPtqOyqg" title="Will 3D Printing Change The World?" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <div>
+                        <span class="video-tag">Macro Economics</span>
+                        <h4 class="video-title">Will 3D Printing Change the World?</h4>
+                    </div>
+                    <p class="video-desc">An in-depth exploration of the commercial, societal, and geopolitical implications of transition paths from traditional subtractive fabrication to additive modular assemblies.</p>
+                </div>
+            </div>
+
+            <!-- Video Card 2 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/tiKUsMIOaO8" title="This 3D Printer Builds Entire Neighborhoods" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <div>
+                        <span class="video-tag">Decentralized Infrastructure</span>
+                        <h4 class="video-title">Building Communities Layer-by-Layer</h4>
+                    </div>
+                    <p class="video-desc">A deep dive into how large-scale architectural concrete printing is tackling global housing insecurity, optimizing structural resilience, and shrinking environmental carbon footprints.</p>
+                </div>
+            </div>
+
+            <!-- Video Card 3 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/Dw4WVjceRKc" title="The Future of 3D Printing" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <div>
+                        <span class="video-tag">Clinical Biofabrication</span>
+                        <h4 class="video-title">The Bio-Frontiers of Medicine</h4>
+                    </div>
+                    <p class="video-desc">Highlighting bioprinting frameworks, organic ink solutions, and customized prosthetics disrupting traditional medicine to save human lives on-demand.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Future Academic References Section -->
+    <section id="references">
+        <div class="section-header">
+            <span class="section-tag">Socio-Technical Data</span>
+            <h2 class="section-title">Academic References</h2>
+        </div>
+        <div class="references-grid">
+            <!-- Source 1 -->
+            <div class="reference-card">
+                <span class="reference-num">01</span>
+                <div>
+                    <span class="ref-tag">Review Paper</span>
+                    <p class="ref-text">Gokhare, V. G., Raut, D. N., & Shinde, D. K. (2021). A Review paper on 3D Printing Aspects and Various Processes Used in the 3D-Printing. <em>Energy</em>, 78(8), 78-86.</p>
+                </div>
+            </div>
+
+            <!-- Source 2 -->
+            <div class="reference-card">
+                <span class="reference-num">02</span>
+                <div>
+                    <span class="ref-tag">Socio-Environmental</span>
+                    <p class="ref-text">Rodhain, F., & Fallery, B. (2011). ICT and Environment: Bad Assumptions and Recent Hypotheses (pp. 1-18). In <em>Towards Managerial Excellence: Challenges and Choices</em>, Edited by P. D. Jawahar, Macmillan, 270 p.</p>
+                </div>
+            </div>
+
+            <!-- Source 3 -->
+            <div class="reference-card">
+                <span class="reference-num">03</span>
+                <div>
+                    <span class="ref-tag">Societal Implications</span>
+                    <p class="ref-text">Maric, J., Rodhain, F., & Barlette, Y. (2017). 3D Printing Trends - Discussing Societal, Environmental and Ethical Implications. <em>Management des Technologies Organisationnelles</em>.</p>
+                </div>
+            </div>
+
+            <!-- Source 4 -->
+            <div class="reference-card">
+                <span class="reference-num">04</span>
+                <div>
+                    <span class="ref-tag">Social Impact</span>
+                    <p class="ref-text">Zhao, Y. (2022). Analysis of the social impact of 3D Printing and its future development. <em>Highlights in Science, Engineering and Technology</em>.</p>
+                </div>
+            </div>
+
+            <!-- Source 5 -->
+            <div class="reference-card">
+                <span class="reference-num">05</span>
+                <div>
+                    <span class="ref-tag">Delphi Forecasting</span>
+                    <p class="ref-text">Jiang, R., Kleer, R., & Piller, F. T. (2017). Predicting the future of additive manufacturing: A Delphi study on economic and societal implications of 3D printing for 2030. <em>Technological Forecasting & Social Change</em>.</p>
+                </div>
+            </div>
+
+            <!-- Source 6 -->
+            <div class="reference-card">
+                <span class="reference-num">06</span>
+                <div>
+                    <span class="ref-tag">Biotechnology Impact</span>
+                    <p class="ref-text">Gross, B. (2022). Evaluation of 3D printing and its potential impact on biotechnology and the Chemical Sciences. <em>American Chemical Society</em>, 89(7), 110-117.</p>
+                </div>
+            </div>
+
+            <!-- Source 7 -->
+            <div class="reference-card">
+                <span class="reference-num">07</span>
+                <div>
+                    <span class="ref-tag">Biomaterials Research</span>
+                    <p class="ref-text">Gopinathan, J., & Noh, I. (2022). Recent trends in bioinks for 3D printing - biomaterials research. <em>International Journal of Biological Macromolecules</em>, 11, 76-85.</p>
+                </div>
+            </div>
+
+            <!-- Source 8 -->
+            <div class="reference-card">
+                <span class="reference-num">08</span>
+                <div>
+                    <span class="ref-tag">Medical Biofabrication</span>
+                    <p class="ref-text">Liaw, C. Y., & Guvendiren, M. (2017). Current and emerging applications of 3D printing in medicine. <em>Biofabrication</em>, 9(2), 024102.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Footer -->
+    <footer>
+        <p class="footer-text">&copy; 2026 FUTUR<span>3D</span> • Additive Manufacturing Research Portal</p>
+    </footer>
+
+</body>
+</html>
